@@ -6,6 +6,10 @@ o	Go to your GitHub account and click on the "+" sign in the top-right corner to
 o	If you haven't already, create a new directory on your local machine where you'll store your code. Open a terminal or command prompt, navigate to that directory, and run the following command to initialize a new Git repository:
 
 ```bash
+rmdir /s /q .git
+```
+
+```bash
 git init
 ```
 
