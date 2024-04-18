@@ -166,5 +166,33 @@ def splitting_and_converting_to_different_word():
     end_tag = "word_document_end"
     run_for_different_sections(start_tag, end_tag, f"whole_doc")
 
+def adding_borders_to_all_tables():
+    from docx import Document
+    from docx.oxml.ns import nsdecls
+    from docx.oxml import parse_xml
+
+    # Load the document
+    doc = Document("C:\\Users\\2113196\\Downloads\\whole_doc.docx")
+
+    # Define the border style using XML
+    border_xml = '''
+    <w:tcBorders xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+    <w:top w:val="single"/>
+    <w:left w:val="single"/>
+    <w:bottom w:val="single"/>
+    <w:right w:val="single"/>
+    </w:tcBorders>
+    '''
+
+    # Apply the border to each table and each cell
+    for table in doc.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                cell._tc.get_or_add_tcPr().append(parse_xml(border_xml))
+
+    # Save the document
+    doc.save("C:\\Users\\2113196\\Downloads\\whole_doc1.docx")
+
 create_template_folders_with_xml()        
 splitting_and_converting_to_different_word()
+adding_borders_to_all_tables()
